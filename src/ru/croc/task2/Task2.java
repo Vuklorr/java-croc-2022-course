@@ -8,6 +8,9 @@ public class Task2 {
         while (b >= 1024.0) {
             b /= 1024.0;
             i++;
+            if(i == 5) {
+                break;
+            }
         }
         switch (i) {
             case 1:
