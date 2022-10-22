@@ -43,13 +43,17 @@ public class Task3 {
             swap(nums, indexMin, 0);
         } else { //элементы не на своих местах - поменять их дважды
             swap(nums, indexMin, 0);
+
+            if(nums[indexMin] > nums[indexMax]) {
+                indexMax = indexMin;
+            }
             swap(nums, indexMax, nums.length - 1);
         }
 
     }
 
     /**
-     * Метод, который менят местами 2 элемента в массиве
+     * Метод, который меняет местами 2 элемента в массиве
      * @param nums - массив целых чисел
      * @param index - индекс, откуда элемент массива нужно перенести
      * @param i - индекс, куда нужно положить элемент массива
