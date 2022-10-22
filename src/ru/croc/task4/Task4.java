@@ -10,7 +10,6 @@ public class Task4 {
                 "  /* main method */\n" +
                 "  public static void main(String[] args/* we put command line arguments here*/) {\n" +
                 "    // this line prints my first greeting to the screen\n" +
-                "    int a = 1 / 2 //dev\n" +
                 "    System.out.println(\"Hi!\"); // :)\n" +
                 "  }\n" +
                 "} // the end\n" +
@@ -18,7 +17,6 @@ public class Task4 {
         String noComments = removeJavaComments(source);
         System.out.print(noComments);
     }
-
     private static String removeJavaComments(String text) {
         StringBuilder noComments = new StringBuilder();
         int i = 0;
@@ -28,7 +26,7 @@ public class Task4 {
                 if(text.charAt(i + 1) == '/') { // комментарий - однострочный
                     i = text.indexOf('\n', i) - 1;
                 } else if(text.charAt(i + 1) == '*') { // комментарий - многострочный
-                    i = text.indexOf("*/", i) + 1;
+                    i = text.indexOf("*/", i + 2) + 1;
                 } else {
                     noComments.append(ch); // не комментарий (деление, например)
                 }
@@ -41,3 +39,4 @@ public class Task4 {
     }
 
 }
+
