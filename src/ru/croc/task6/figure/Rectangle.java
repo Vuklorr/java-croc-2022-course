@@ -1,10 +1,8 @@
 package src.ru.croc.task6.figure;
 
 import src.ru.croc.task6.figure.api.Figure;
-import src.ru.croc.task6.figure.Point;
-import src.ru.croc.task6.figure.api.Movable;
 
-public class Rectangle extends Figure implements Movable {
+public class Rectangle extends Figure {
     private String name;
     private Point left;
     private Point right;

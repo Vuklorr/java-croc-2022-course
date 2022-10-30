@@ -1,9 +1,8 @@
 package src.ru.croc.task6.figure;
 
 import src.ru.croc.task6.figure.api.Figure;
-import src.ru.croc.task6.figure.api.Movable;
 
-public class Circle extends Figure implements Movable {
+public class Circle extends Figure {
     private String name;
     private Point centre;
     private int radius = 1;
