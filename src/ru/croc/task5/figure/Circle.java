@@ -1,13 +1,14 @@
 package src.ru.croc.task5.figure;
 
 import src.ru.croc.task5.figure.api.Figure;
+import src.ru.croc.task5.figure.exeption.IllegalRadiusValue;
 
 public class Circle implements Figure {
     private String name;
     private Point centre;
     private int radius = 1;
 
-    public Circle(String name, Point centre, int radius) {
+    public Circle(String name, Point centre, int radius) throws IllegalRadiusValue {
         this.name = name;
         this.centre = centre;
         setRadius(radius);
@@ -33,9 +34,9 @@ public class Circle implements Figure {
         return radius;
     }
 
-    public void setRadius(int radius) {
+    public void setRadius(int radius) throws IllegalRadiusValue {
         if(radius < 1) {
-            System.out.println("Радиус меньше 1!");
+            throw new IllegalRadiusValue(radius);
         } else {
             this.radius = radius;
         }

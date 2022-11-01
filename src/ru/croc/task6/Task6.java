@@ -7,9 +7,10 @@ import src.ru.croc.task6.figure.Circle;
 import src.ru.croc.task6.figure.Point;
 import src.ru.croc.task6.figure.Rectangle;
 import src.ru.croc.task6.figure.api.Figure;
+import src.ru.croc.task6.figure.exeption.IllegalRadiusValue;
 
 public class Task6 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalRadiusValue {
         Figure circle = new Circle("C", new Point(100, 100), 10);
         Figure circleMov = new Circle("C", new Point(1, 1), 1);
         Figure rectangle = new Rectangle("R", new Point(100,100), new Point(150, 200));
