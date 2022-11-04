@@ -29,6 +29,6 @@ public class Annotation {
 
     @Override
     public String toString() {
-        return figure.dataToString() + ": " + label;
+        return figure.toString() + ": " + label;
     }
 }

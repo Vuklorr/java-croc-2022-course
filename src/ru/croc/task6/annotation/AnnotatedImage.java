@@ -20,8 +20,7 @@ public class AnnotatedImage {
 
     public Annotation findByPoint(int x, int y) {
         for(Annotation annotation : annotations) {
-            if(annotation.getFigure().getPoint().getX() == x
-                    && annotation.getFigure().getPoint().getY() == y) {
+            if(annotation.getFigure().pointBelong(x,y)) {
                 return annotation;
             }
         }

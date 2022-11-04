@@ -43,13 +43,21 @@ public class Circle extends Figure {
     }
 
     @Override
-    public String dataToString() {
+    public String toString() {
         return name + " (" + centre.getX() + ", " + centre.getY() + "), " + radius;
     }
 
+    /**
+     * Метод, проверяющий принадлежит ли точка окружности
+     * вычисляется по формуле (x - x0)^2 + (y - y0)^ <= r^2, где x0,y0 - координаты центра
+     * @param x
+     * @param y
+     * @return true - если принадлежит
+     */
     @Override
-    public Point getPoint() {
-        return centre;
+    public boolean pointBelong(int x, int y) {
+        return (x - centre.getX()) * (x - centre.getX())
+                + (y - centre.getY()) * (y - centre.getY()) <= (radius * radius);
     }
 
     @Override

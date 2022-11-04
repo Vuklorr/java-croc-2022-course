@@ -38,13 +38,13 @@ public class Rectangle extends Figure {
     }
 
     @Override
-    public String dataToString() {
+    public String toString() {
         return name + " (" + left.getX() + ", " + left.getY() + "), (" + right.getX() + ", " + right.getY() + ")";
     }
 
     @Override
-    public Point getPoint() {
-        return left;
+    public boolean pointBelong(int x, int y) {
+        return (left.getX() <= x && x <= right.getX()) && (left.getY() <= y && y <= right.getY());
     }
 
 
