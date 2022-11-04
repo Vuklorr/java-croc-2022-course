@@ -42,6 +42,13 @@ public class Rectangle extends Figure {
         return name + " (" + left.getX() + ", " + left.getY() + "), (" + right.getX() + ", " + right.getY() + ")";
     }
 
+    /**
+     * Метод, проверяющий принадлежит ли точка окружности
+     * вычисляется по формуле x1 <= x <= x2 && y1 <= y <= y2, где x1,y1 - координаты левого угла, x2,y2 - правого
+     * @param x
+     * @param y
+     * @return true - если принадлежит
+     */
     @Override
     public boolean pointBelong(int x, int y) {
         return (left.getX() <= x && x <= right.getX()) && (left.getY() <= y && y <= right.getY());
