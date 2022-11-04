@@ -2,7 +2,7 @@ package src.ru.croc.task5.figure;
 
 import src.ru.croc.task5.figure.api.Figure;
 
-public class Rectangle implements Figure {
+public class Rectangle extends Figure {
     private String name;
     private Point left;
     private Point right;
@@ -38,7 +38,7 @@ public class Rectangle implements Figure {
     }
 
     @Override
-    public String dataToString() {
+    public String toString() {
         return name + " (" + left.getX() + ", " + left.getY() + "), (" + right.getX() + ", " + right.getY() + ")";
     }
 

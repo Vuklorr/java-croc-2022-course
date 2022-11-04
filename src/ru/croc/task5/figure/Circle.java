@@ -3,7 +3,7 @@ package src.ru.croc.task5.figure;
 import src.ru.croc.task5.figure.api.Figure;
 import src.ru.croc.task5.figure.exeption.IllegalRadiusValue;
 
-public class Circle implements Figure {
+public class Circle extends Figure {
     private String name;
     private Point centre;
     private int radius = 1;
@@ -43,7 +43,7 @@ public class Circle implements Figure {
     }
 
     @Override
-    public String dataToString() {
+    public String toString() {
         return name + " (" + centre.getX() + ", " + centre.getY() + "), " + radius;
     }
 
