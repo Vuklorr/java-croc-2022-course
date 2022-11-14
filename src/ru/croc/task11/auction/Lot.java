@@ -1,15 +1,16 @@
 package src.ru.croc.task11.auction;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class Lot {
-    private double currentCost; //FIXME заменить дабл
-    private String nameClient;
-    private Date timeEnd; //FIXME посмотреть переменную для времени
 
-    public Lot(double currentCost, String nameClient, Date timeEnd) {
-        this.currentCost = currentCost;
-        this.nameClient = nameClient;
+    private final LocalDateTime timeEnd;
+    private BigDecimal currentCost;
+    private String nameClient;
+
+    public Lot(BigDecimal startCost, LocalDateTime timeEnd) {
+        this.currentCost = startCost;
         this.timeEnd = timeEnd;
     }
 
@@ -19,16 +20,18 @@ public class Lot {
      * @param name - тот, кто предложил ставку
      */
 
-    public void bet (double cost, String name) { //FIXME поменять дабл, учесть условие, что торги еще идут
-        currentCost = cost;
-        nameClient = name;
+    public synchronized void bet(BigDecimal cost, String name, LocalDateTime betTime) {
+        if(cost.compareTo(currentCost) > 0 && betTime.isAfter(timeEnd)) {
+            currentCost = cost;
+            nameClient = name;
+        }
     }
 
     /**
      * Метод получения победителя
      * @return возвращает победителя аукциона
      */
-    public String getWinner () {
+    public synchronized String getWinner() {
         return nameClient;
     }
 }
