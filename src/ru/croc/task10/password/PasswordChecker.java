@@ -5,7 +5,12 @@ import java.util.concurrent.Callable;
 public class PasswordChecker implements Callable<String> {
 
     /**
-     * Номер слова с которого начинается перебор
+     * Начальный символ.
+     */
+    private static final int A_AS_CHAR ='a';
+
+    /**
+     * Номер слова с которого начинается перебор.
      */
     private final long start;
 
@@ -14,6 +19,9 @@ public class PasswordChecker implements Callable<String> {
      */
     private final long end;
 
+    /**
+     * Число символов в зашифрованном пароле
+     */
     private final int symbolQuantity;
 
     /**
@@ -26,9 +34,10 @@ public class PasswordChecker implements Callable<String> {
      */
     private final String defaultResponse;
 
+    /**
+     * Размер алфавита.
+     */
     private final int alphabetPower;
-
-    private static final int A_AS_CHAR ='a';
 
     /**
      * Конструктор.
@@ -40,11 +49,11 @@ public class PasswordChecker implements Callable<String> {
      * @param defaultResponse ответ по умолчанию
      * @param alphabetPower сила словаря
      */
-    public PasswordChecker(long start, long end, int symbolQuantity, String initialHash, String defaultResponse, int alphabetPower) {
+    public PasswordChecker(long start, long end, String initialHash, int symbolQuantity, String defaultResponse, int alphabetPower) {
         this.start = start;
         this.end = end;
-        this.symbolQuantity = symbolQuantity;
         this.initialHash = initialHash;
+        this.symbolQuantity = symbolQuantity;
         this.defaultResponse = defaultResponse;
         this.alphabetPower = alphabetPower;
     }
@@ -52,10 +61,8 @@ public class PasswordChecker implements Callable<String> {
     @Override
     public String call() {
         for (long i=start; i < end; i++) {
-//            System.out.println("Поток=" + defaultResponse + ", Started item=" + i);
-            char[] next = calculateInitialWord(i, symbolQuantity, alphabetPower);
+            char[] next = calculateInitialWord(i);
             String password = new String(next);
-            System.out.println(password);
             String hash = GenerateHash.hashPassword(password);
             if (initialHash.equals(hash)) {
                 return password;
@@ -65,24 +72,17 @@ public class PasswordChecker implements Callable<String> {
     }
 
     /**
-     * Подсчет изначального слова.
+     * Получение пароля по номеру
      *
-     * @param start начальное значение для перебора
-     * @param symbolQuantity число символов в пароле
+     * @param num начальное значение для перебора
      * @return первый пароль
      */
-    private static char[] calculateInitialWord(long start, int symbolQuantity, int alphabetPower) {
+    private char[] calculateInitialWord(long num) {
         char[] password = new char[symbolQuantity];
-        long current = start;
         for (int i = symbolQuantity - 1; i >= 0; i--) {
-            password[i] = (char) (current % alphabetPower + A_AS_CHAR);
-            current = current / alphabetPower;
+            password[i] = (char) (num % alphabetPower + A_AS_CHAR);
+            num = num / alphabetPower;
         }
         return password;
-        //return new char[]{'p','a','s','s','w','r','d'};
     }
-
-    /*private char[] nextPassword(char[] current) {
-
-    }*/
 }
