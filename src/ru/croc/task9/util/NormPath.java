@@ -9,8 +9,8 @@ public class NormPath {
         StringBuilder normPath = new StringBuilder();
         String[] dir = path.split("/");
 
-        for(String str : dir) {
-            if(str.charAt(0) == '.') { //проверка на . и ..
+        for (String str : dir) {
+            if (str.charAt(0) == '.') { //проверка на . и ..
                 toThePreviousDirectory(str, listPath);
             } else { // если это директория
                 listPath.add(str);
@@ -28,12 +28,10 @@ public class NormPath {
     }
 
     private static void toThePreviousDirectory (String str, List<String> listPath) {
-        if(str.length() == 2) { // проверка на ..
-            if(listPath.size() == 1) { //если последний элемент .. или директория
-                if(!listPath.get(0).equals("..")) { //если директория, то удалить
-                    listPath.remove(0);
-                }
-            } else if (listPath.isEmpty()) { //если список пуст, то добавить ..
+        if (str.length() == 2) { // проверка на ..
+            if (listPath.isEmpty()) { // если пуст, то добавить ..
+                listPath.add("..");
+            } else if (listPath.get(listPath.size() - 1).equals("..")) { //если последний элемент .., добавить ..
                 listPath.add("..");
             } else {
                 listPath.remove(listPath.size() - 1); //вернуться к предыдущей директории
