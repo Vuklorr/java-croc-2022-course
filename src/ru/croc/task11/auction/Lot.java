@@ -14,14 +14,21 @@ public class Lot {
         this.timeEnd = timeEnd;
     }
 
+    public BigDecimal getCurrentCost() {
+        return currentCost;
+    }
+
+    public LocalDateTime getTimeEnd() {
+        return timeEnd;
+    }
+
     /**
-     * Метод ставки на аукйионе
+     * Метод ставки на аукционе
      * @param cost - новая ставка
      * @param name - тот, кто предложил ставку
      */
-
     public synchronized void bet(BigDecimal cost, String name, LocalDateTime betTime) {
-        if(cost.compareTo(currentCost) > 0 && betTime.isAfter(timeEnd)) {
+        if(cost.compareTo(currentCost) > 0 && betTime.isBefore(timeEnd)) {
             currentCost = cost;
             nameClient = name;
         }
