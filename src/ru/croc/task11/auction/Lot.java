@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 public class Lot {
 
     private final LocalDateTime timeEnd;
-    private BigDecimal currentCost;
-    private String nameClient;
+    private volatile BigDecimal currentCost;
+    private volatile String nameClient;
 
     public Lot(BigDecimal startCost, LocalDateTime timeEnd) {
         this.currentCost = startCost;
@@ -23,7 +23,8 @@ public class Lot {
     }
 
     /**
-     * Метод ставки на аукционе
+     * Метод ставки на аукционе.
+     *
      * @param cost - новая ставка
      * @param name - тот, кто предложил ставку
      */
@@ -35,10 +36,20 @@ public class Lot {
     }
 
     /**
-     * Метод получения победителя
-     * @return возвращает победителя аукциона
+     * Получение победителя по времени.
+     *
+     * @param currentTime - текущее время
+     * @return - имя победителя
      */
-    public synchronized String getWinner() {
-        return nameClient;
+    public synchronized String getWinner(LocalDateTime currentTime) {
+        if(nameClient == null) {
+            return "Победителя нет";
+        }
+
+        if(currentTime.isAfter(timeEnd)) {
+            return nameClient;
+        }
+
+        return "Победитель не известен";
     }
 }
