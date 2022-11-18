@@ -1,13 +1,12 @@
-package src.ru.croc.task6;
+package ru.croc.task6;
 
-
-import src.ru.croc.task6.annotation.AnnotatedImage;
-import src.ru.croc.task6.annotation.Annotation;
-import src.ru.croc.task6.figure.Circle;
-import src.ru.croc.task6.figure.Point;
-import src.ru.croc.task6.figure.Rectangle;
-import src.ru.croc.task6.figure.api.Figure;
-import src.ru.croc.task6.figure.exeption.IllegalRadiusValue;
+import ru.croc.task6.annotation.AnnotatedImage;
+import ru.croc.task6.annotation.Annotation;
+import ru.croc.task6.figure.Circle;
+import ru.croc.task6.figure.Point;
+import ru.croc.task6.figure.Rectangle;
+import ru.croc.task6.figure.api.Figure;
+import ru.croc.task6.figure.exeption.IllegalRadiusValue;
 
 public class Task6 {
     public static void main(String[] args) throws IllegalRadiusValue {

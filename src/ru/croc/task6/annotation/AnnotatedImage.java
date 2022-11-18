@@ -1,4 +1,4 @@
-package src.ru.croc.task6.annotation;
+package ru.croc.task6.annotation;
 
 public class AnnotatedImage {
     private final String imagePath;

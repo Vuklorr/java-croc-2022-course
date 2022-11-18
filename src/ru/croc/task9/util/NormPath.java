@@ -1,4 +1,4 @@
-package src.ru.croc.task9.util;
+package ru.croc.task9.util;
 
 import java.util.ArrayList;
 import java.util.List;

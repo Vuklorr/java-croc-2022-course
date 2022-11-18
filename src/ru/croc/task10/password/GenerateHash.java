@@ -1,4 +1,4 @@
-package src.ru.croc.task10.password;
+package ru.croc.task10.password;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

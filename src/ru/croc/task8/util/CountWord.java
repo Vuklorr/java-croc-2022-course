@@ -1,4 +1,4 @@
-package src.ru.croc.task8.util;
+package ru.croc.task8.util;
 
 import java.io.File;
 import java.io.FileInputStream;

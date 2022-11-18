@@ -1,9 +1,9 @@
-package src.ru.croc.task7;
+package ru.croc.task7;
 
-import src.ru.croc.task7.chess.ChessPosition;
-import src.ru.croc.task7.chess.KnightMove;
-import src.ru.croc.task7.chess.exeption.IllegalMoveException;
-import src.ru.croc.task7.chess.exeption.IllegalPositionException;
+import ru.croc.task7.chess.ChessPosition;
+import ru.croc.task7.chess.KnightMove;
+import ru.croc.task7.chess.exeption.IllegalMoveException;
+import ru.croc.task7.chess.exeption.IllegalPositionException;
 
 public class Task7 {
     public static void main (String[] args) throws IllegalPositionException, IllegalMoveException {

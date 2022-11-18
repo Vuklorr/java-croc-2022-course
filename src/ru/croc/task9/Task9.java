@@ -1,6 +1,6 @@
-package src.ru.croc.task9;
+package ru.croc.task9;
 
-import src.ru.croc.task9.util.NormPath;
+import ru.croc.task9.util.NormPath;
 
 public class Task9 {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
-package src.ru.croc.task6.figure;
+package ru.croc.task6.figure;
 
-import src.ru.croc.task6.figure.api.Figure;
+import ru.croc.task6.figure.api.Figure;
 
 public class Rectangle extends Figure {
     private String name;

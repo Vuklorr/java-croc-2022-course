@@ -1,6 +1,4 @@
-package src.ru.croc.task7.chess.exeption;
-
-import src.ru.croc.task7.chess.Board;
+package ru.croc.task7.chess.exeption;
 
 public class IllegalPositionException extends Exception {
     private final int x;

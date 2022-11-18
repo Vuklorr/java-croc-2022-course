@@ -1,6 +1,6 @@
-package src.ru.croc.task7.chess.exeption;
+package ru.croc.task7.chess.exeption;
 
-import src.ru.croc.task7.chess.ChessPosition;
+import ru.croc.task7.chess.ChessPosition;
 
 public class IllegalMoveException extends Exception {
     private final ChessPosition currentPosition;

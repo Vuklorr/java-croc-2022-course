@@ -1,7 +1,7 @@
-package src.ru.croc.task6.figure;
+package ru.croc.task6.figure;
 
-import src.ru.croc.task6.figure.api.Figure;
-import src.ru.croc.task6.figure.exeption.IllegalRadiusValue;
+import ru.croc.task6.figure.api.Figure;
+import ru.croc.task6.figure.exeption.IllegalRadiusValue;
 
 public class Circle extends Figure {
     private String name;

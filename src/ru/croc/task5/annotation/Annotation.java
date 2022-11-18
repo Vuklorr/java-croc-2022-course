@@ -1,6 +1,6 @@
-package src.ru.croc.task5.annotation;
+package ru.croc.task5.annotation;
 
-import src.ru.croc.task5.figure.api.Figure;
+import ru.croc.task5.figure.api.Figure;
 
 public class Annotation {
     private Figure figure;

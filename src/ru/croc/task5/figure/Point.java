@@ -1,4 +1,4 @@
-package src.ru.croc.task5.figure;
+package ru.croc.task5.figure;
 
 public class Point {
     private int x;

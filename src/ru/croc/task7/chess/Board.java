@@ -1,4 +1,4 @@
-package src.ru.croc.task7.chess;
+package ru.croc.task7.chess;
 
 public class Board {
     private static final char[] COLUMN = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};

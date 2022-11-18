@@ -1,12 +1,12 @@
-package src.ru.croc.task5;
+package ru.croc.task5;
 
-import src.ru.croc.task5.annotation.AnnotatedImage;
-import src.ru.croc.task5.annotation.Annotation;
-import src.ru.croc.task5.figure.Circle;
-import src.ru.croc.task5.figure.Point;
-import src.ru.croc.task5.figure.Rectangle;
-import src.ru.croc.task5.figure.api.Figure;
-import src.ru.croc.task5.figure.exeption.IllegalRadiusValue;
+import ru.croc.task5.annotation.AnnotatedImage;
+import ru.croc.task5.annotation.Annotation;
+import ru.croc.task5.figure.Circle;
+import ru.croc.task5.figure.Point;
+import ru.croc.task5.figure.Rectangle;
+import ru.croc.task5.figure.api.Figure;
+import ru.croc.task5.figure.exeption.IllegalRadiusValue;
 
 public class Task5 {
     public static void main(String[] args) throws IllegalRadiusValue {
@@ -18,7 +18,5 @@ public class Task5 {
 
         System.out.println(tree.toString());
         System.out.println(car.toString());
-
-
     }
 }

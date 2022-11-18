@@ -1,4 +1,4 @@
-package src.ru.croc.task6.figure.exeption;
+package ru.croc.task6.figure.exeption;
 
 public class IllegalRadiusValue extends Exception {
     private final int value;

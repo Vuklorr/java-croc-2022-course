@@ -1,8 +1,8 @@
-package src.ru.croc.task10.tests;
+package ru.croc.task10.tests;
 
 import org.testng.annotations.Test;
-import src.ru.croc.task10.password.GenerateHash;
-import src.ru.croc.task10.password.HackPassword;
+import ru.croc.task10.password.GenerateHash;
+import ru.croc.task10.password.HackPassword;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotSame;

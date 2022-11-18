@@ -1,4 +1,4 @@
-package src.ru.croc.task11.auction;
+package ru.croc.task11.auction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

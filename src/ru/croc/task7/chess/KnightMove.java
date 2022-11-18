@@ -1,7 +1,7 @@
-package src.ru.croc.task7.chess;
+package ru.croc.task7.chess;
 
-import src.ru.croc.task7.chess.exeption.IllegalMoveException;
-import src.ru.croc.task7.chess.exeption.IllegalPositionException;
+import ru.croc.task7.chess.exeption.IllegalMoveException;
+import ru.croc.task7.chess.exeption.IllegalPositionException;
 
 public class KnightMove {
     private final ChessPosition[] chessPositions;

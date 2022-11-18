@@ -1,6 +1,6 @@
-package src.ru.croc.task8;
+package ru.croc.task8;
 
-import src.ru.croc.task8.util.CountWord;
+import ru.croc.task8.util.CountWord;
 
 import java.io.FileNotFoundException;
 
