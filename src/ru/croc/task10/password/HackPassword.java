@@ -17,11 +17,11 @@ public class HackPassword {
     public static String calculatePassword(int threadsNumber, String initialHash) {
         List<Future<String>> responses = new ArrayList<>(threadsNumber); //массив для ответов потоков
         long step = calculateStep(threadsNumber); //период перебора
+        ExecutorService executorService = Executors.newFixedThreadPool(threadsNumber);
 
         for (int i = 0; i < threadsNumber; i++) {
             PasswordChecker item = new PasswordChecker(step * i, step * (i + 1),initialHash,
                     WORD_LENGTH, DEFAULT_RESPONSE, ALPHABET_POWER);
-            ExecutorService executorService = Executors.newSingleThreadExecutor();
             Future<String> future = executorService.submit(item);
             responses.add(future);
         }
@@ -34,6 +34,7 @@ public class HackPassword {
                     if (item.isDone()) {
                         countFinishedThread++;
                         if (!DEFAULT_RESPONSE.equals(item.get())) {
+                            executorService.shutdownNow();
                             return item.get();
                         }
                     }
