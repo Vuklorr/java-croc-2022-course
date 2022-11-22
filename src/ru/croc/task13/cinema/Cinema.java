@@ -7,7 +7,14 @@ import java.util.*;
 
 public class Cinema {
 
+    /**
+     * Map список фильмов, где ключ - id фильма, а значение его название.
+     */
     private final HashMap<String, String> films = new HashMap<>();
+
+    /**
+     * История просмотров каждого пользователя.
+     */
     private final List<List<String>> browsingHistory = new ArrayList<>();
 
     public Cinema() throws FileNotFoundException {
@@ -23,8 +30,13 @@ public class Cinema {
         return browsingHistory;
     }
 
+    /**
+     * Генерирует map - фильмы из файла.
+     *
+     * @throws FileNotFoundException - в случае, если не найдет файл
+     */
     private void generateFilms() throws FileNotFoundException {
-        File fileFilms = new File("ru/croc/task13/cinema/fileResource/films");
+        File fileFilms = new File("src/ru/croc/task13/cinema/fileResource/films");
         Scanner in = new Scanner(new FileInputStream(fileFilms));
 
         while(in.hasNext()) {
@@ -34,6 +46,12 @@ public class Cinema {
             films.put(key, name);
         }
     }
+
+    /**
+     * Генерирует список истории просмотров.
+     *
+     * @throws FileNotFoundException - в случае, если не найдет файл
+     */
 
     private void generateBrowsingHistory() throws FileNotFoundException {
         File fileBH = new File("src/ru/croc/task13/cinema/fileResource/browsingHistory");

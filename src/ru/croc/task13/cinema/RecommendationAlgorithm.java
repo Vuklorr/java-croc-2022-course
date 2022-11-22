@@ -1,40 +1,101 @@
 package ru.croc.task13.cinema;
 
+import ru.croc.task13.cinema.util.UtilClass;
+
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RecommendationAlgorithm {
 
-    public String recommendedFilms(String clientsFilmString) throws FileNotFoundException {
+    /**
+     * Список просмотренных фильмов пользователем
+     */
+    private List<String> clientsFilmList = new ArrayList<>();
+
+    /**
+     * Находит рекомендованный фильм
+     *
+     * @param clientsFilmString - Фильмы, которые посмотрел пользователь
+     * @return название рекомендованного фильма
+     */
+    public String recommendedFilm(String clientsFilmString) throws FileNotFoundException {
         Cinema cinema = new Cinema();
-        List<String> clientsFilmList = new ArrayList<>(List.of(clientsFilmString.split(",")));
-        List<String> listOfMatchingFilm = new ArrayList<>();
+        setClientsFilmList(clientsFilmString);
+        List<List<String>> listRecommendedFilm = new ArrayList<>();
 
-        for(List<String> clientList : cinema.getBrowsingHistory()) { //отобрать клиентов, у которых просмотры схожи
-            if(filmsMatch(clientList, clientsFilmList)) {
-                listOfMatchingFilm.add(clientList.toString());
-
-            }
+        for(List<String> clientsFilms : cinema.getBrowsingHistory()) {
+            filmsMatch(clientsFilms, listRecommendedFilm);
         }
 
+        String keyRecommendationFilm = getKeyRecommendationFilm(listRecommendedFilm);
 
-        return "";
+        if(keyRecommendationFilm == null) {
+            return "Рекомендованных фильмов нет.";
+        }
+
+        return cinema.getFilms().get(keyRecommendationFilm);
     }
 
-    private boolean filmsMatch(List<String> clientList, List<String> clientsFilmList) {
+    /**
+     * Преобразует строку в список.
+     *
+     * @param clientsFilmString - фильмы, которые посмотрел пользователь
+     */
+    private void setClientsFilmList(String clientsFilmString) {
+        clientsFilmList = List.of(clientsFilmString.split(","));
+    }
+
+    /**
+     * Находит фильмы, которые хотя бы наполовину совпадают с просмотрами клиента + удаляет фильмы,
+     * которые пользователь уже посмотрел.
+     *
+     * @param clientList - список фильмов пользователя
+     * @param listFilmsMatch - список фильмов, которые еще не посмотрел пользователь
+     */
+    private void filmsMatch(List<String> clientList, List<List<String>> listFilmsMatch) {
         int countMatch = 0;
-        for(String film : clientsFilmList) {
-            if(clientList.contains(film)) {
+        Iterator<String> filmIterator = clientList.iterator();
+
+        while(filmIterator.hasNext()) {
+            String nextFilm = filmIterator.next();
+            if (clientsFilmList.contains(nextFilm)) {
                 countMatch++;
-                clientList.remove(film);
+                filmIterator.remove();
             }
         }
 
-        return countMatch >= (clientsFilmList.size() / 2);
+        if (countMatch > (clientsFilmList.size() / 2) && !clientList.isEmpty()) { //хотя бы наполовину совпадают
+            listFilmsMatch.add(clientList);
+        }
     }
 
-    private void deleteViewedFilms(List<String> listFilm, List<String> clientsFilmList) {
+    /**
+     * Взять ключ самого просматриваемого фильма.
+     *
+     * @param listFilm - список фильмов, которые еще не посмотрел пользователь
+     * @return - ключ самого просматриваемого фильма
+     */
+    private String getKeyRecommendationFilm(List<List<String>> listFilm) {
+        HashMap<String, Integer> maxRecommendation = new HashMap<>();
 
+        for(List<String> list : listFilm) {
+            for(String film : list) {
+                if(maxRecommendation.containsKey(film)) {
+                    int temp = maxRecommendation.get(film);
+                    temp += 1;
+                    maxRecommendation.replace(film, temp);
+                } else {
+                    maxRecommendation.put(film, 1);
+                }
+            }
+        }
+        int max = UtilClass.getMax(maxRecommendation.values());
+
+        for(String key : maxRecommendation.keySet()) {
+            if(maxRecommendation.get(key).equals(max)) {
+                return key;
+            }
+        }
+        return null;
     }
 }
