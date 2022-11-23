@@ -1,5 +1,4 @@
 package ru.croc.task13.cinema.util;
-
 import java.util.Collection;
 
 public class UtilClass {

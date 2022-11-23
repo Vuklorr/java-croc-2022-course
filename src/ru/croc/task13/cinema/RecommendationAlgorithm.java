@@ -21,13 +21,13 @@ public class RecommendationAlgorithm {
     public String recommendedFilm(String clientsFilmString) throws FileNotFoundException {
         Cinema cinema = new Cinema();
         setClientsFilmList(clientsFilmString);
-        List<List<String>> listRecommendedFilm = new ArrayList<>();
+        List<List<String>> listRecommendedFilms = new ArrayList<>();
 
         for(List<String> clientsFilms : cinema.getBrowsingHistory()) {
-            filmsMatch(clientsFilms, listRecommendedFilm);
+            filmsMatch(clientsFilms, listRecommendedFilms);
         }
 
-        String keyRecommendationFilm = getKeyRecommendationFilm(listRecommendedFilm);
+        String keyRecommendationFilm = getKeyRecommendationFilm(listRecommendedFilms);
 
         if(keyRecommendationFilm == null) {
             return "Рекомендованных фильмов нет.";
@@ -49,23 +49,22 @@ public class RecommendationAlgorithm {
      * Находит фильмы, которые хотя бы наполовину совпадают с просмотрами клиента + удаляет фильмы,
      * которые пользователь уже посмотрел.
      *
-     * @param clientList - список фильмов пользователя
-     * @param listFilmsMatch - список фильмов, которые еще не посмотрел пользователь
+     * @param listFilms - список фильмов пользователя
+     * @param listRecommendedFilms - список фильмов, которые еще не посмотрел пользователь
      */
-    private void filmsMatch(List<String> clientList, List<List<String>> listFilmsMatch) {
-        int countMatch = 0;
-        Iterator<String> filmIterator = clientList.iterator();
+    private void filmsMatch(List<String> listFilms, List<List<String>> listRecommendedFilms) {
+        Set<String> setFilmsMatch = new HashSet<>();
+        Set<String> setClientsFilm = new HashSet<>(clientsFilmList);
 
-        while(filmIterator.hasNext()) {
-            String nextFilm = filmIterator.next();
-            if (clientsFilmList.contains(nextFilm)) {
-                countMatch++;
-                filmIterator.remove();
+        for (String film : listFilms) {
+            if (clientsFilmList.contains(film)) {
+                setFilmsMatch.add(film);
             }
         }
 
-        if (countMatch > (clientsFilmList.size() / 2) && !clientList.isEmpty()) { //хотя бы наполовину совпадают
-            listFilmsMatch.add(clientList);
+        if (!setFilmsMatch.isEmpty() && setFilmsMatch.size() >= (setClientsFilm.size() / 2)) { //хотя бы наполовину совпадают
+            listFilms.removeAll(setFilmsMatch);
+            listRecommendedFilms.add(listFilms);
         }
     }
 
@@ -89,6 +88,7 @@ public class RecommendationAlgorithm {
                 }
             }
         }
+
         int max = UtilClass.getMax(maxRecommendation.values());
 
         for(String key : maxRecommendation.keySet()) {
