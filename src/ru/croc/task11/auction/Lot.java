@@ -41,7 +41,7 @@ public class Lot {
      * @param currentTime - текущее время
      * @return - имя победителя
      */
-    public synchronized String getWinner(LocalDateTime currentTime) {
+    public String getWinner(LocalDateTime currentTime) {
         if(nameClient == null) {
             return "Победителя нет";
         }
