@@ -36,7 +36,7 @@ public class Cinema {
      * @throws FileNotFoundException - в случае, если не найдет файл
      */
     private void generateFilms() throws FileNotFoundException {
-        File fileFilms = new File("src/ru/croc/task13/cinema/fileResource/films");
+        File fileFilms = new File("src/ru/croc/task13/cinema/file/films");
         Scanner in = new Scanner(new FileInputStream(fileFilms));
 
         while(in.hasNext()) {
@@ -54,7 +54,7 @@ public class Cinema {
      */
 
     private void generateBrowsingHistory() throws FileNotFoundException {
-        File fileBH = new File("src/ru/croc/task13/cinema/fileResource/browsingHistory");
+        File fileBH = new File("src/ru/croc/task13/cinema/file/browsingHistory");
         Scanner in = new Scanner(new FileInputStream(fileBH));
 
         while(in.hasNext()) {
