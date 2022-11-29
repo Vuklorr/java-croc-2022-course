@@ -1,19 +1,30 @@
 package ru.croc.task14.spam.api;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-public interface BlackListFilter <T, E extends Iterable <T>> {
+public interface BlackListFilter <T> {
 
-    default E filterComments(E comments, Predicate<T> predicate) { //FIXME удалять из копии comments
-        Iterator<T> commentIterator = comments.iterator();
+    /**
+     * Удаляет комментарии, в которых содержатся слова из черного списка.
+     *
+     * @param comments - список комментраиев
+     * @param predicate - предикат с условием фильтрования
+     * @return - очищенные комментарии
+     */
+    default Iterable<T> filterComments(Iterable<T> comments, Predicate<T> predicate) {
+        Iterator<T> commentsIterator = comments.iterator();
+        Collection<T> clearComments = new ArrayList<>();
 
-        while (commentIterator.hasNext()) {
-            T comment = commentIterator.next();
-            if(predicate.test(comment)) {
-                commentIterator.remove();
+        while (commentsIterator.hasNext()) {
+            T comment = commentsIterator.next();
+
+            if(!predicate.test(comment)) {
+                clearComments.add(comment);
             }
         }
-        return comments;
+        return clearComments;
     }
 }
