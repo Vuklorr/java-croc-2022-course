@@ -10,16 +10,31 @@ import java.util.Scanner;
 
 public class ParseFile {
 
-    public static void parseFile(String path, List<Division> divisionList) throws FileNotFoundException {
-        File fileDivision = new File(path);
-        Scanner in = new Scanner(new FileInputStream(fileDivision));
+    /**
+     * Парсит файл в список отделов.
+     *
+     * @param path - путь к файлу
+     * @param divisionList - список отделов
+     * @throws FileNotFoundException - если файл не найден
+     */
 
-        while (in.hasNext()) {
-            String str = in.nextLine();
-            String currentName = str.substring(0, str.indexOf(","));
-            String parent = str.substring(str.indexOf(",") + 1, str.lastIndexOf(","));
-            int processingTime = Integer.parseInt(str.substring(str.lastIndexOf(",") + 1));
-            divisionList.add(new Division(currentName,parent, processingTime));
+    public static void parseFile(String path, List<Division> divisionList) throws FileNotFoundException {
+        File divisionFile = new File(path);
+        Scanner in = new Scanner(new FileInputStream(divisionFile));
+
+        while (in.hasNextLine()) {
+            String[] data = in.nextLine().split(",");
+            Division parentDivision = null;
+
+            if(!data[1].equals("-")) {
+                for(Division division : divisionList) {
+                    if(division.getName().equals(data[1])) {
+                        parentDivision = division;
+                        break;
+                    }
+                }
+            }
+            divisionList.add(new Division(data[0],parentDivision, Integer.parseInt(data[2])));
         }
     }
 }

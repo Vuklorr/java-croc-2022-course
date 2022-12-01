@@ -1,25 +1,25 @@
 package ru.croc.task15.division;
 
 public class Division {
-    private final String currentName;
-    private final String parent;
-    private int processingTime;
+    private final String name;
+    private final Division parent;
+    private final int processingTime;
 
-    public Division(String currentName, String parent, int processingTime) {
-        this.currentName = currentName;
+    public Division(String name, Division parent, int processingTime) {
+        this.name = name;
         this.parent = parent;
         this.processingTime = processingTime;
     }
 
-    public String getCurrentName() {
-        return currentName;
+    public String getName() {
+        return name;
     }
 
-    public String getParent() {
+    public Division getParent() {
         return parent;
     }
 
-    public void processing() {
-        processingTime--;
+    public int getProcessingTime() {
+        return processingTime;
     }
 }
