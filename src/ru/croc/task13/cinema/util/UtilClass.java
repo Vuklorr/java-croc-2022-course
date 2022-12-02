@@ -4,7 +4,7 @@ import java.util.Collection;
 public class UtilClass {
 
     /**
-     * Возвращает максимальное значение из колекции
+     * Возвращает максимальное значение из колекции.
      *
      * @param values - список значений
      * @return - максимальное значение
@@ -17,5 +17,17 @@ public class UtilClass {
             }
         }
         return max;
+    }
+
+    /**
+     * Половина фильмов, которые посмотрел пользователь.
+     *
+     * @param countClientsFilms - общее число просмотренных фильмов
+     * @return - половина просмотренных фильмов
+     */
+    public static int getHalfClientsFilms(int countClientsFilms) {
+        return countClientsFilms % 2 == 0
+               ? countClientsFilms / 2
+               : countClientsFilms / 2 + 1;
     }
 }

@@ -21,13 +21,16 @@ public class RecommendationAlgorithm {
     public String recommendedFilm(String clientsFilmString) throws FileNotFoundException {
         Cinema cinema = new Cinema();
         setClientsFilmList(clientsFilmString);
-        List<List<String>> listRecommendedFilms = new ArrayList<>();
+        List<List<String>> recommendedFilmsList = new ArrayList<>();
 
         for(List<String> clientsFilms : cinema.getBrowsingHistory()) {
-            filmsMatch(clientsFilms, listRecommendedFilms);
+            List<String> similarFilms = filmsMatch(clientsFilms);
+            if(!(similarFilms == null)) {
+                recommendedFilmsList.add(similarFilms);
+            }
         }
 
-        String keyRecommendationFilm = getKeyRecommendationFilm(listRecommendedFilms);
+        String keyRecommendationFilm = getKeyRecommendationFilm(recommendedFilmsList);
 
         if(keyRecommendationFilm == null) {
             return "Рекомендованных фильмов нет.";
@@ -49,23 +52,25 @@ public class RecommendationAlgorithm {
      * Находит фильмы, которые хотя бы наполовину совпадают с просмотрами клиента + удаляет фильмы,
      * которые пользователь уже посмотрел.
      *
-     * @param listFilms - список фильмов пользователя
-     * @param listRecommendedFilms - список фильмов, которые еще не посмотрел пользователь
+     * @param filmList - список фильмов пользователя
+     * @return filmList - список рекомендованных фильмов
      */
-    private void filmsMatch(List<String> listFilms, List<List<String>> listRecommendedFilms) {
-        Set<String> setFilmsMatch = new HashSet<>();
-        Set<String> setClientsFilm = new HashSet<>(clientsFilmList);
+    private List<String> filmsMatch(List<String> filmList) {
+        Set<String> filmsMatchSet = new HashSet<>();
+        Set<String> clientsFilmSet = new HashSet<>(clientsFilmList);
 
-        for (String film : listFilms) {
+        for (String film : filmList) {
             if (clientsFilmList.contains(film)) {
-                setFilmsMatch.add(film);
+                filmsMatchSet.add(film);
             }
         }
 
-        if (!setFilmsMatch.isEmpty() && setFilmsMatch.size() >= (setClientsFilm.size() / 2)) { //хотя бы наполовину совпадают
-            listFilms.removeAll(setFilmsMatch);
-            listRecommendedFilms.add(listFilms);
+        int halfClientsFilms = UtilClass.getHalfClientsFilms(clientsFilmSet.size()); //взять половину просмотренных пользователем фильмов
+        if (filmsMatchSet.size() >= halfClientsFilms) { //хотя бы наполовину совпадают
+            filmList.removeAll(filmsMatchSet); //удалить те, которые пользователь уже посмотрел
+            return filmList;
         }
+        return null;
     }
 
     /**
