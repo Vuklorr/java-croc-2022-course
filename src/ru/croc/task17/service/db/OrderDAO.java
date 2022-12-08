@@ -14,9 +14,7 @@ public class OrderDAO {
                 "id INT PRIMARY KEY AUTO_INCREMENT," +
                 "number_order INT NOT NULL," +
                 "login VARCHAR(255) NOT NULL," +
-                "article VARCHAR(255) NOT NULL," +
-                "name VARCHAR(255) NOT NULL," +
-                "cost INT NOT NULL" +
+                "article VARCHAR(255) NOT NULL" +
                 ");";
 
         try(Connection connection = UtilDB.getConnection()) {
@@ -50,16 +48,14 @@ public class OrderDAO {
      */
     public void insertOrder(Order order) throws SQLException, ClassNotFoundException {
         final String INSERT_ORDERS_SQL = "INSERT INTO \"Order\" " +
-                "(number_order, login, article, name, cost) VALUES " +
-                "(?, ?, ?, ?, ?);";
+                "(number_order, login, article) VALUES " +
+                "(?, ?, ?);";
         try(Connection connection = UtilDB.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDERS_SQL);
 
             preparedStatement.setInt(1, order.numberOrder());
             preparedStatement.setString(2, order.login());
             preparedStatement.setString(3, order.article());
-            preparedStatement.setString(4, order.name());
-            preparedStatement.setInt(5, order.cost());
             preparedStatement.executeUpdate();
         }
     }
