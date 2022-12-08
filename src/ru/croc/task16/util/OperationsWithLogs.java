@@ -1,13 +1,10 @@
 package ru.croc.task16.util;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
-public class OperationWithLogs {
+public class OperationsWithLogs {
 
     /**
      * Получение фалов с расширинеиями .log и .trace.
@@ -37,25 +34,12 @@ public class OperationWithLogs {
     }
 
     /**
-     * Добавление строк логов в список.
-     *
-     * @param file - файл - лог
-     * @param listLog - список строк логов
-     */
-    public static void addLog (File file, List<String> listLog) throws FileNotFoundException {
-        Scanner in = new Scanner(new FileInputStream(file));
-        while (in.hasNext()) {
-            listLog.add(in.nextLine());
-        }
-    }
-
-    /**
      * Проверка, что файл является логом.
      *
      * @param path - путь файла
      * @return - true в если в названии есть .log или .trace
      */
     private static boolean fileLog(String path) {
-        return path.contains(".log") || path.contains(".trace");
+        return path.toLowerCase().endsWith(".log") || path.toLowerCase().endsWith(".trace");
     }
 }
